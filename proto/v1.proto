@@ -2,17 +2,22 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 //
-// Protobuf definitions for the AVM (Algebraic Virtual Machine) used in Starkom.
+// Protobuf definitions for Starkom's AVM (Algebraic Virtual Machine).
+//
+// The AVM is a virtual machine that executes programs represented as PLONK
+// circuits. It's the compilation target for the Starkom language.
 //
 // This package defines version 1 of the AVM, which is based on vanilla PLONK
-// arithmetization. Future versions may use different schemes.
+// arithmetization (3 columns). Future versions may use different schemes.
 //
-// These protobuf messages can be used to serialize and deserialize AVM circuits
-// and witnesses.
+// These protobuf messages can be used to serialize and deserialize circuits as
+// well as witnesses.
 
-syntax = 'proto3';
+syntax = "proto3";
 
 package starkom.avm.v1;
+
+import "version.proto";
 
 // A scalar in the field used in the AVM.
 message Scalar {
@@ -60,13 +65,23 @@ message Node {
 }
 
 // A PLONK circuit.
+//
+// NOTE: the circuit must not include the three blinding rows required in PLONK.
+// They'll be added automatically by the AVM loader when parsing a `Circuit`.
 message Circuit {
-  repeated Gate gates = 1;
-  repeated Node nodes = 2;
+  Version version = 1; // Required. Must be 1.0.0 for this version of the AVM.
+  repeated Gate gates = 2;
+  repeated Node nodes = 3;
 }
 
 // A witness for a PLONK circuit.
+//
+// NOTE: the witness must not include the three blinding rows required in PLONK.
+// They'll be added automatically by the AVM loader when parsing a `Witness`.
 message Witness {
+  // Required. Must be 1.0.0 for this version of the AVM.
+  Version version = 1;
+
   // A single row of the witness. Each row corresponds to a gate in the circuit.
   message Row {
     Scalar lhs = 1;
@@ -76,5 +91,5 @@ message Witness {
 
   // Witness rows. The number of rows must match the number of gates in the
   // circuit.
-  repeated Row rows = 1;
+  repeated Row rows = 2;
 }

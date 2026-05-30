@@ -1,0 +1,19 @@
+[package]
+name = "starkom-avm"
+version = "1.0.0"
+description = "Starkom Algebraic Virtual Machine (AVM)."
+license = "Apache-2.0"
+repository = "https://github.com/libernet-xyz/avm.git"
+readme = "README.md"
+edition = "2024"
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
+anyhow = "1.0.102"
+prost = "0.14.3"
+starkom-plonk = "1.0.1"
+
+[build-dependencies]
+prost-build = "0.14.3"
