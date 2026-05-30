@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 mod avm;
+pub mod version;
 
 mod starkom {
     pub mod avm {

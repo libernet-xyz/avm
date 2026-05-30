@@ -13,7 +13,8 @@ crate-type = ["rlib", "cdylib"]
 [dependencies]
 anyhow = "1.0.102"
 prost = "0.14.3"
-starkom-plonk = "1.0.1"
+starkom-bluesky = "2.2.0"
+starkom-plonk = "1.1.0"
 
 [build-dependencies]
 prost-build = "0.14.3"
