@@ -5,10 +5,9 @@ syntax = "proto3";
 
 package starkom.avm;
 
-// Version information for the AVM. This message is used in the Circuit and
-// Witness messages to indicate which version of the AVM they are compatible
-// with. This allows for future versions of the AVM to be introduced without
-// breaking compatibility with older circuits and witnesses.
+// Version information for the AVM. This message is used in the Circuit and Witness messages to
+// indicate which version of the AVM they are compatible with. This allows for future versions of
+// the AVM to be introduced without breaking compatibility with older circuits and witnesses.
 message Version {
   uint32 major = 1;
   uint32 minor = 2;
